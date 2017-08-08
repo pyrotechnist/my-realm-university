@@ -9,7 +9,15 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import javax.inject.Inject;
+
+import static com.longyuan.my_realm_university.R.id.fab;
+
 public class UniversityActivity extends AppCompatActivity {
+
+
+    @Inject UniversityPresenter mUniversityPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,11 @@ public class UniversityActivity extends AppCompatActivity {
         }
 
 
+        DaggerUniversityComponent.builder()
+                .universityRepositoryComponent( ((App)getApplication()).getmUniversityRepositoryComponent())
+                .universityPresenterModule(new UniversityPresenterModule(universityFragment))
+                .build()
+                .inject(this);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

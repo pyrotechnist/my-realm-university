@@ -12,7 +12,7 @@ import dagger.Component;
 
 
 @Singleton
-@Component(modules = {UniversityRepositoryModule.class})
+@Component()
 public interface UniversityRepositoryComponent {
 
     UniversityRepository getUniversityRepository();
