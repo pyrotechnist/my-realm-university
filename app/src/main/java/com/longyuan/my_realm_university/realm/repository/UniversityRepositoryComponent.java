@@ -1,5 +1,11 @@
 package com.longyuan.my_realm_university.realm.repository;
 
+import android.app.Application;
+import android.content.Context;
+
+import com.longyuan.my_realm_university.AppModule;
+import com.longyuan.my_realm_university.UniversityActivity;
+import com.longyuan.my_realm_university.data.remote.RemoteDataStore;
 import com.longyuan.my_realm_university.realm.repository.impl.UniversityRepository;
 
 import javax.inject.Singleton;
@@ -12,8 +18,10 @@ import dagger.Component;
 
 
 @Singleton
-@Component()
+@Component(modules = {UniversityRepositoryModule.class})
 public interface UniversityRepositoryComponent {
 
-    UniversityRepository getUniversityRepository();
+    void inject(UniversityActivity activity);
+    void inject(RemoteDataStore remoteDataStore);
+
 }

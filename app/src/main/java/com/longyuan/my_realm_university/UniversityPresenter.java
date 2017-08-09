@@ -1,7 +1,7 @@
 package com.longyuan.my_realm_university;
 
 import com.longyuan.my_realm_university.model.University;
-import com.longyuan.my_realm_university.realm.repository.DataSource;
+import com.longyuan.my_realm_university.realm.repository.DataStore;
 import com.longyuan.my_realm_university.realm.repository.impl.UniversityRepository;
 
 import java.util.List;
@@ -25,11 +25,8 @@ public class UniversityPresenter implements UniversityContarct.Presenter {
         mView = view;
 
         mUniversityRepository = universityRepository;
-    }
 
-    @Inject
-    void setupListeners() {
-        mView.setPresnter(this);
+        view.setPresnter(this);
     }
 
 
@@ -43,7 +40,7 @@ public class UniversityPresenter implements UniversityContarct.Presenter {
     @Override
     public void loadUniversities() {
 
-        mUniversityRepository.loadAllUniversities(new DataSource.LoadUniversitiesCallback() {
+        mUniversityRepository.loadAllUniversities(new DataStore.LoadUniversitiesCallback() {
             @Override
             public void onUniversitiesLoaded(List<University> universities) {
                 mView.showUniversities(universities);

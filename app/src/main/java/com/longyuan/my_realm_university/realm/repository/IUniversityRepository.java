@@ -7,7 +7,7 @@ package com.longyuan.my_realm_university.realm.repository;
 public interface IUniversityRepository {
 
 
-    void loadAllUniversities(DataSource.LoadUniversitiesCallback callback);
+    void loadAllUniversities(DataStore.LoadUniversitiesCallback callback);
 
 
 

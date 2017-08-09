@@ -1,47 +1,46 @@
 package com.longyuan.my_realm_university.realm.repository.impl;
 
+import android.content.Context;
+
+import com.longyuan.my_realm_university.data.local.LocalDataStore;
+import com.longyuan.my_realm_university.data.remote.RemoteDataStore;
 import com.longyuan.my_realm_university.model.University;
-import com.longyuan.my_realm_university.realm.repository.DataSource;
+import com.longyuan.my_realm_university.realm.repository.DataStore;
 import com.longyuan.my_realm_university.realm.repository.IUniversityRepository;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * Created by loxu on 07/08/2017.
  */
-@Singleton
+
 public class UniversityRepository implements IUniversityRepository {
 
-    private final static Map<String, University> UNIVERSITY_SERVICE_DATA;
+    private LocalDataStore mLocalDataStore;
+    private RemoteDataStore mRemoteDataStore;
 
-    static {
-        UNIVERSITY_SERVICE_DATA = new LinkedHashMap<>(2);
-        addUniversity("1", "YYYY");
-        addUniversity("2", "HHHHH");
-    }
-
-    private static void addUniversity(String id, String name) {
-        University newUniversity = new University(id, name);
-        UNIVERSITY_SERVICE_DATA.put(newUniversity.getId(), newUniversity);
-    }
-
+    private DataStore.LoadUniversitiesCallback mLoadUniversitiesCallback;
 
     @Inject
-    UniversityRepository(){
+    public UniversityRepository(RemoteDataStore remoteDataStore, LocalDataStore localDataStore){
+        this.mLocalDataStore = localDataStore;
+        this.mRemoteDataStore = remoteDataStore;
     }
-
-
 
 
     @Override
-    public void loadAllUniversities(DataSource.LoadUniversitiesCallback callback) {
+    public void loadAllUniversities(DataStore.LoadUniversitiesCallback callback) {
 
-        callback.onUniversitiesLoaded(new ArrayList<University>(UNIVERSITY_SERVICE_DATA.values()));
+
+        List<University> universities = new ArrayList<University>();
+        universities.addAll(mLocalDataStore.loadAllUniversities());
+
+        callback.onUniversitiesLoaded(universities);
 
     }
 }

@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.longyuan.my_realm_university.realm.repository.impl.UniversityRepository;
+
 import javax.inject.Inject;
 
 import static com.longyuan.my_realm_university.R.id.fab;
@@ -16,7 +18,9 @@ import static com.longyuan.my_realm_university.R.id.fab;
 public class UniversityActivity extends AppCompatActivity {
 
 
-    @Inject UniversityPresenter mUniversityPresenter;
+    //@Inject UniversityPresenter mUniversityPresenter;
+
+    @Inject UniversityRepository mUniversityRepository;
 
 
     @Override
@@ -26,6 +30,8 @@ public class UniversityActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        App.getUniversityRepositoryComponent().inject(this);
 
         UniversityFragment universityFragment = (UniversityFragment)getSupportFragmentManager().findFragmentById(R.id.frag_content);
 
@@ -37,11 +43,12 @@ public class UniversityActivity extends AppCompatActivity {
         }
 
 
-        DaggerUniversityComponent.builder()
-                .universityRepositoryComponent( ((App)getApplication()).getmUniversityRepositoryComponent())
-                .universityPresenterModule(new UniversityPresenterModule(universityFragment))
+       /* DaggerUniversityComponent.builder()
+                .universityPresenterModule(new UniversityPresenterModule(universityFragment, mUniversityRepository))
                 .build()
-                .inject(this);
+                .inject(this);*/
+
+       new UniversityPresenter(mUniversityRepository,universityFragment);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
