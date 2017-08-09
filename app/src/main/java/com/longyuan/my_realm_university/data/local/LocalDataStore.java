@@ -19,9 +19,10 @@ public class LocalDataStore implements DataStore{
     private final static Map<String, University> UNIVERSITY_SERVICE_DATA;
 
     static {
-        UNIVERSITY_SERVICE_DATA = new LinkedHashMap<>(2);
+        UNIVERSITY_SERVICE_DATA = new LinkedHashMap<>();
         addUniversity("1", "YYYY");
         addUniversity("2", "HHHHH");
+        addUniversity("3", "CCCCCC");
     }
 
     private static void addUniversity(String id, String name) {
