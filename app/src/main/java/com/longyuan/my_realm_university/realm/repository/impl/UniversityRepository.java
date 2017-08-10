@@ -42,5 +42,10 @@ public class UniversityRepository implements IUniversityRepository {
 
         callback.onUniversitiesLoaded(universities);
 
+
+        mRemoteDataStore.loadAllUniversities(callback);
+
+
+
     }
 }

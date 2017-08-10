@@ -1,5 +1,6 @@
-package com.longyuan.my_realm_university;
+package com.longyuan.my_realm_university.University;
 
+import com.longyuan.my_realm_university.App;
 import com.longyuan.my_realm_university.model.University;
 import com.longyuan.my_realm_university.realm.repository.DataStore;
 import com.longyuan.my_realm_university.realm.repository.impl.UniversityRepository;
@@ -17,14 +18,15 @@ public class UniversityPresenter implements UniversityContarct.Presenter {
 
     private UniversityContarct.View mView;
 
-    private UniversityRepository mUniversityRepository;
-
     @Inject
-    UniversityPresenter(UniversityRepository universityRepository,UniversityContarct.View view) {
+    protected UniversityRepository mUniversityRepository;
+
+
+    public UniversityPresenter(UniversityContarct.View view) {
 
         mView = view;
 
-        mUniversityRepository = universityRepository;
+        App.getAppComponent().inject(this);
 
         view.setPresnter(this);
     }

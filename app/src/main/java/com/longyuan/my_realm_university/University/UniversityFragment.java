@@ -1,4 +1,4 @@
-package com.longyuan.my_realm_university;
+package com.longyuan.my_realm_university.University;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.longyuan.my_realm_university.R;
 import com.longyuan.my_realm_university.model.University;
 import com.longyuan.my_realm_university.utils.UniversityRecyclerViewAdapter;
 

@@ -2,10 +2,7 @@ package com.longyuan.my_realm_university;
 
 import android.app.Application;
 
-import com.longyuan.my_realm_university.realm.repository.DaggerUniversityRepositoryComponent;
-import com.longyuan.my_realm_university.realm.repository.UniversityRepositoryComponent;
-import com.longyuan.my_realm_university.realm.repository.UniversityRepositoryModule;
-import com.longyuan.my_realm_university.realm.repository.impl.UniversityRepository;
+import com.longyuan.my_realm_university.network.injection.NetworkModule;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -17,24 +14,25 @@ import io.realm.RealmConfiguration;
 public class App extends Application{
 
 
-        private static UniversityRepositoryComponent mUniversityRepositoryComponent;
+        private static AppComponent mAppComponent;
 
         @Override
         public void onCreate() {
             super.onCreate();
 
-            //RealmConfiguration realmConfig = new RealmConfiguration.Builder().build();
-            //Realm.setDefaultConfiguration(realmConfig);
+            Realm.init(this);
+            RealmConfiguration realmConfig = new RealmConfiguration.Builder().build();
+            Realm.setDefaultConfiguration(realmConfig);
 
-            mUniversityRepositoryComponent = DaggerUniversityRepositoryComponent.builder()
-                    .universityRepositoryModule(new UniversityRepositoryModule("http://localhost:1337"))
+            mAppComponent = DaggerAppComponent.builder()
+                    .networkModule(new NetworkModule("http://10.0.2.2:1337"))
                     .build();
 
         }
 
-        public static UniversityRepositoryComponent getUniversityRepositoryComponent() {
+        public static AppComponent getAppComponent() {
 
-            return  mUniversityRepositoryComponent;
+            return  mAppComponent;
         }
 
 

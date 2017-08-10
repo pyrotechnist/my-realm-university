@@ -30,8 +30,6 @@ public class LocalDataStore implements DataStore{
         UNIVERSITY_SERVICE_DATA.put(newUniversity.getId(), newUniversity);
     }
 
-
-    @Inject
     public LocalDataStore(){
 
     }

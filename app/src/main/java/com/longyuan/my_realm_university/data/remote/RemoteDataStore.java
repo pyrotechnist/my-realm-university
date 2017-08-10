@@ -5,6 +5,7 @@ import android.util.Log;
 import com.longyuan.my_realm_university.App;
 import com.longyuan.my_realm_university.data.local.LocalDataStore;
 import com.longyuan.my_realm_university.model.University;
+import com.longyuan.my_realm_university.network.api.UniversityApi;
 import com.longyuan.my_realm_university.realm.repository.DataStore;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class RemoteDataStore implements DataStore{
 
 
     public RemoteDataStore() {
-        App.getUniversityRepositoryComponent().inject(this);
+        App.getAppComponent().inject(this);
     }
 
     @Override
@@ -43,10 +44,6 @@ public class RemoteDataStore implements DataStore{
         retrofit.create(UniversityApi.class).getUniversities().enqueue(retroCallback);
     }
 
-    private interface UniversityApi {
-        @GET("/University")
-        Call<List<University>> getUniversities();
-    }
 
     Callback<List<University>> retroCallback = new Callback<List<University>>() {
         @Override

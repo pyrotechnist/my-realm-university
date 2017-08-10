@@ -1,4 +1,4 @@
-package com.longyuan.my_realm_university;
+package com.longyuan.my_realm_university.University;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,19 +9,16 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.longyuan.my_realm_university.realm.repository.impl.UniversityRepository;
+import com.longyuan.my_realm_university.App;
+import com.longyuan.my_realm_university.R;
 
 import javax.inject.Inject;
-
-import static com.longyuan.my_realm_university.R.id.fab;
 
 public class UniversityActivity extends AppCompatActivity {
 
 
-    //@Inject UniversityPresenter mUniversityPresenter;
-
-    @Inject UniversityRepository mUniversityRepository;
-
+    @Inject
+    protected UniversityContarct.Presenter mUniversityPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +26,6 @@ public class UniversityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-        App.getUniversityRepositoryComponent().inject(this);
 
         UniversityFragment universityFragment = (UniversityFragment)getSupportFragmentManager().findFragmentById(R.id.frag_content);
 
@@ -43,13 +37,11 @@ public class UniversityActivity extends AppCompatActivity {
         }
 
 
-       /* DaggerUniversityComponent.builder()
-                .universityPresenterModule(new UniversityPresenterModule(universityFragment, mUniversityRepository))
+       DaggerUniversityComponent.builder()
+                .appComponent(((App)getApplication()).getAppComponent())
+                .universityModule(new UniversityModule(universityFragment))
                 .build()
-                .inject(this);*/
-
-       new UniversityPresenter(mUniversityRepository,universityFragment);
-
+                .inject(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -27,39 +27,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class UniversityRepositoryModule {
 
-    String mBaseUrl;
-
-    public UniversityRepositoryModule(String mBaseUrl) {
-        this.mBaseUrl = mBaseUrl;
-    }
-
-    @Provides
-    @Singleton
-    Gson provideGson() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-        return gsonBuilder.create();
-    }
-
-    @Provides
-    @Singleton
-    OkHttpClient provideOkhttpClient() {
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
-        return client.build();
-    }
-
-    @Provides
-    @Singleton
-    Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl(mBaseUrl)
-                .client(okHttpClient)
-                .build();
-        return retrofit;
-    }
-
-
     @Provides
     @Singleton
     RemoteDataStore providesRemoteDataStore() {
@@ -71,5 +38,12 @@ public class UniversityRepositoryModule {
     LocalDataStore providesLocalDataStore() {
         return new LocalDataStore();
     }
+
+/*    @Provides
+    @Singleton
+    public UniversityRepository provideUniversityRepository(final RemoteDataStore remoteDataStore, final LocalDataStore localDataStore) {
+        return new UniversityRepository(remoteDataStore, localDataStore);
+    }*/
+
 
 }
