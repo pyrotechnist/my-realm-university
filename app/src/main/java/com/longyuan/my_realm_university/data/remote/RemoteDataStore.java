@@ -2,6 +2,8 @@ package com.longyuan.my_realm_university.data.remote;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.longyuan.my_realm_university.App;
 import com.longyuan.my_realm_university.data.local.LocalDataStore;
 import com.longyuan.my_realm_university.model.University;
@@ -17,7 +19,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by loxu on 09/08/2017.
@@ -27,6 +32,8 @@ public class RemoteDataStore implements DataStore{
 
     @Inject
     Retrofit retrofit;
+
+
 
 
     private LoadUniversitiesCallback mLoadUniversitiesCallback;
@@ -41,9 +48,36 @@ public class RemoteDataStore implements DataStore{
 
         mLoadUniversitiesCallback = callback;
 
-        retrofit.create(UniversityApi.class).getUniversities().enqueue(retroCallback);
+        //.enqueue(retroCallback);
+        retrofit.create(UniversityApi.class).getUniversities()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> callback.onUniversitiesLoaded(data));
+
     }
 
+    private void createPromotionsAPI() {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+/*
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(PromotionAPI.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        mPromotionAPI = retrofit.create(PromotionAPI.class);*/
+
+
+       /* Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(PromotionAPI.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+
+
+        mPromotionRxAPI = retrofit.create(PromotionRxAPI.class);*/
+    }
 
     Callback<List<University>> retroCallback = new Callback<List<University>>() {
         @Override

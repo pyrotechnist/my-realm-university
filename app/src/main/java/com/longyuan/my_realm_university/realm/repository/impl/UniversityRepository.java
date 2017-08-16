@@ -38,10 +38,12 @@ public class UniversityRepository implements IUniversityRepository {
 
 
         List<University> universities = new ArrayList<University>();
-        universities.addAll(mLocalDataStore.loadAllUniversities());
+        //universities.addAll(mLocalDataStore.loadAllUniversities());
 
-        callback.onUniversitiesLoaded(universities);
+        //callback.onUniversitiesLoaded(universities);
 
+
+        //mLocalDataStore.loadAllUniversities(callback);
 
         mRemoteDataStore.loadAllUniversities(callback);
 

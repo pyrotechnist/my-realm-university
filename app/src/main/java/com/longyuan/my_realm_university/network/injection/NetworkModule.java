@@ -10,6 +10,7 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -44,8 +45,9 @@ public class NetworkModule {
     @Singleton
     Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create(gson))
                 .baseUrl(mBaseUrl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
         return retrofit;

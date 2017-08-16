@@ -10,6 +10,9 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 /**
  * Created by loxu on 09/08/2017.
  */
@@ -40,7 +43,29 @@ public class LocalDataStore implements DataStore{
     @Override
     public void loadAllUniversities(DataStore.LoadUniversitiesCallback callback) {
 
-        callback.onUniversitiesLoaded(new ArrayList<University>(UNIVERSITY_SERVICE_DATA.values()));
+        //callback.onUniversitiesLoaded(new ArrayList<University>(UNIVERSITY_SERVICE_DATA.values()));
+
+
+
+        try(Realm realmInstance = Realm.getDefaultInstance()){
+            realmInstance.executeTransaction(tRealm -> {
+
+                //University university = tRealm.createObject(University.class);
+
+                //university.setId("6");
+
+                //university.setName("Test2");
+
+                final RealmResults<University> universities = tRealm.where(University.class).findAll();
+
+                List<University> universitiesList  = tRealm.copyFromRealm(universities);//new ArrayList(universities);
+
+                callback.onUniversitiesLoaded(universitiesList);
+
+            });
+
+        }
+
 
     }
 
