@@ -50,11 +50,11 @@ public class LocalDataStore implements DataStore{
         try(Realm realmInstance = Realm.getDefaultInstance()){
             realmInstance.executeTransaction(tRealm -> {
 
-                //University university = tRealm.createObject(University.class);
+               /* University university = tRealm.createObject(University.class);
 
-                //university.setId("6");
+                university.setId("2");
 
-                //university.setName("Test2");
+                university.setName("Test2");*/
 
                 final RealmResults<University> universities = tRealm.where(University.class).findAll();
 
@@ -66,6 +66,10 @@ public class LocalDataStore implements DataStore{
 
         }
 
+
+    }
+
+    public void deleteUniversity(String id){
 
     }
 

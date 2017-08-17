@@ -20,6 +20,8 @@ public class UniversityRecyclerViewAdapter extends RecyclerView.Adapter<Universi
 
     private List<University> mUniversities;
 
+    private OnItemClickListener mOnItemClickListener;
+
     public UniversityRecyclerViewAdapter(List<University> universities) {
         mUniversities = universities;
     }
@@ -43,7 +45,19 @@ public class UniversityRecyclerViewAdapter extends RecyclerView.Adapter<Universi
 
         holder.mTextViewName.setText(university.getName());
 
+        View.OnClickListener listener = new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                mOnItemClickListener.onItemClick(university,position);
+            }
+        };
+
+        holder.itemView.setOnClickListener(listener);
+
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -56,6 +70,13 @@ public class UniversityRecyclerViewAdapter extends RecyclerView.Adapter<Universi
 
         notifyDataSetChanged();
     }
+
+    public void deleteUniversity(int position){
+        mUniversities.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mUniversities.size());
+    }
+
 
     public static class UniversityViewHolder extends RecyclerView.ViewHolder {
 
@@ -73,5 +94,8 @@ public class UniversityRecyclerViewAdapter extends RecyclerView.Adapter<Universi
     }
 
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
+    }
 }
 

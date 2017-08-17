@@ -16,5 +16,11 @@ public interface DataStore {
 
     }
 
+    interface DeleteUniversityCallback {
+
+        void onUniversityDeleted(University university);
+
+    }
+
     void loadAllUniversities(DataStore.LoadUniversitiesCallback callback);
 }

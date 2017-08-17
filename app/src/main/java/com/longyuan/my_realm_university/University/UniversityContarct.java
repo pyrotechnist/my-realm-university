@@ -14,6 +14,8 @@ public interface UniversityContarct {
         void showUniversities(List<University> universities);
 
         void setPresnter(Presenter presnter);
+
+        void deleteUniversityOnRecyclerView(int postion);
     }
 
     interface Presenter{
@@ -22,5 +24,6 @@ public interface UniversityContarct {
 
         void loadUniversities();
 
+        void deleteUniversity(String id,int position);
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -17,5 +18,8 @@ public interface UniversityApi {
 
         @GET("/University")
         Observable<List<University>> getUniversities();
+
+        @GET("/University/destroy/{id}")
+        Observable<University> deleteUniversity(@Path("id") String id);
 
 }

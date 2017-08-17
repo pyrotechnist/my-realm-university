@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.longyuan.my_realm_university.R;
 import com.longyuan.my_realm_university.model.University;
+import com.longyuan.my_realm_university.utils.OnItemClickListener;
 import com.longyuan.my_realm_university.utils.UniversityRecyclerViewAdapter;
 
 import java.util.ArrayList;
@@ -49,6 +50,19 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
 
         mUniversityRecyclerViewAdapter = new UniversityRecyclerViewAdapter(new ArrayList<University>());
 
+        mUniversityRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(University item,int position) {
+
+                mPresenter.deleteUniversity(item.getId(),position);
+            }
+
+            @Override
+            public void onItemLongClick(University item) {
+
+            }
+        });
+
 
         mRecyclerView.setAdapter(mUniversityRecyclerViewAdapter);
 
@@ -69,5 +83,11 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
 
         mPresenter = presnter;
 
+    }
+
+    @Override
+    public void deleteUniversityOnRecyclerView(int postion){
+
+        mUniversityRecyclerViewAdapter.deleteUniversity(postion);
     }
 }

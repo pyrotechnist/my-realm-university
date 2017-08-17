@@ -49,4 +49,20 @@ public class UniversityPresenter implements UniversityContarct.Presenter {
             }
         });
     }
+
+    @Override
+    public void deleteUniversity(String id,int position) {
+
+        mUniversityRepository.deleteUniversity(id, new DataStore.DeleteUniversityCallback() {
+            @Override
+            public void onUniversityDeleted(University university) {
+                if(id.equals(university.getId()))
+                {
+                    mView.deleteUniversityOnRecyclerView(position);
+                }
+            }
+        });
+
+
+    }
 }

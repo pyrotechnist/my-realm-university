@@ -30,11 +30,11 @@ import rx.schedulers.Schedulers;
 
 public class RemoteDataStore implements DataStore{
 
+/*    @Inject
+    Retrofit retrofit;*/
+
     @Inject
-    Retrofit retrofit;
-
-
-
+    UniversityApi mUniversityApi;
 
     private LoadUniversitiesCallback mLoadUniversitiesCallback;
 
@@ -49,12 +49,28 @@ public class RemoteDataStore implements DataStore{
         mLoadUniversitiesCallback = callback;
 
         //.enqueue(retroCallback);
-        retrofit.create(UniversityApi.class).getUniversities()
+        mUniversityApi.getUniversities()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> callback.onUniversitiesLoaded(data));
 
     }
+
+    public void deleteUniversity(String id,DeleteUniversityCallback callback){
+
+        mUniversityApi.deleteUniversity(id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> callback.onUniversityDeleted(data));
+    }
+
+
+
+
+
+
+
+
 
     private void createPromotionsAPI() {
         Gson gson = new GsonBuilder()
@@ -76,7 +92,7 @@ public class RemoteDataStore implements DataStore{
                 .build();
 
 
-        mPromotionRxAPI = retrofit.create(PromotionRxAPI.class);*/
+        mUniversityApi = retrofit.create(UniversityApi.class);*/
     }
 
     Callback<List<University>> retroCallback = new Callback<List<University>>() {

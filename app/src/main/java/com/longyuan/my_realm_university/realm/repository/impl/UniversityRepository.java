@@ -50,4 +50,11 @@ public class UniversityRepository implements IUniversityRepository {
 
 
     }
+
+    @Override
+    public void deleteUniversity(String id,DataStore.DeleteUniversityCallback callback) {
+
+        mRemoteDataStore.deleteUniversity(id, callback);
+
+    }
 }

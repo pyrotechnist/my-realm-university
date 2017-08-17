@@ -9,6 +9,8 @@ public interface IUniversityRepository {
 
     void loadAllUniversities(DataStore.LoadUniversitiesCallback callback);
 
+    void deleteUniversity(String id,DataStore.DeleteUniversityCallback callback);
+
 
 
 }
