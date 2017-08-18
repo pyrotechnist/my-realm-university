@@ -11,7 +11,9 @@ import com.longyuan.my_realm_university.network.api.UniversityApi;
 import com.longyuan.my_realm_university.realm.repository.DataStore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -59,6 +61,19 @@ public class RemoteDataStore implements DataStore{
     public void deleteUniversity(String id,DeleteUniversityCallback callback){
 
         mUniversityApi.deleteUniversity(id)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> callback.onUniversityDeleted(data));
+    }
+
+
+    public void createUniversity(String id,DeleteUniversityCallback callback){
+
+        Map<String, String> queries = new HashMap<>();
+        queries.put("id", "4");
+        queries.put("name", "Fudan");
+
+        mUniversityApi.createUniversity(queries)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> callback.onUniversityDeleted(data));
