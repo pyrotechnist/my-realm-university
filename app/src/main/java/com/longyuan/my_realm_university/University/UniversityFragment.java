@@ -90,4 +90,10 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
 
         mUniversityRecyclerViewAdapter.deleteUniversity(postion);
     }
+
+    @Override
+    public void addUniversityOnRecyclerView(University university){
+
+        mUniversityRecyclerViewAdapter.AddUniversity(university);
+    }
 }

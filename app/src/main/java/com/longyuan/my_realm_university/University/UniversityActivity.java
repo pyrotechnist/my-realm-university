@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,10 +17,11 @@ import android.view.MenuItem;
 
 import com.longyuan.my_realm_university.App;
 import com.longyuan.my_realm_university.R;
+import com.longyuan.my_realm_university.University.add.AddUniversityDialogFragment;
 
 import javax.inject.Inject;
 
-public class UniversityActivity extends AppCompatActivity {
+public class UniversityActivity extends AppCompatActivity  implements AddUniversityDialogFragment.AddUniversityDialogListener{
 
 
     @Inject
@@ -54,7 +57,7 @@ public class UniversityActivity extends AppCompatActivity {
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(UniversityActivity.this);
+              /*  AlertDialog.Builder builder = new AlertDialog.Builder(UniversityActivity.this);
                 // Add the buttons
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -69,7 +72,16 @@ public class UniversityActivity extends AppCompatActivity {
 
                 AlertDialog dialog = builder.create();
 
-                dialog.show();
+                dialog.show();*/
+
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+
+                AddUniversityDialogFragment addUniversityDialogFragment = new AddUniversityDialogFragment();
+
+                addUniversityDialogFragment.show(fragmentManager,"addUniversityDialogFragment");
+
+
             }
         });
     }
@@ -79,6 +91,22 @@ public class UniversityActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public void onDialogPositiveClick(String id, String name,AddUniversityDialogFragment dialog) {
+
+
+        dialog.dismiss();
+
+        mUniversityPresenter.addUniversity(id,name);
+
+
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
     }
 
     @Override
@@ -95,5 +123,7 @@ public class UniversityActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
 }

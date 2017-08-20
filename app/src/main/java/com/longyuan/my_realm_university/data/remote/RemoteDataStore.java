@@ -67,11 +67,11 @@ public class RemoteDataStore implements DataStore{
     }
 
 
-    public void createUniversity(String id,DeleteUniversityCallback callback){
+    public void createUniversity(String id,String name,DeleteUniversityCallback callback){
 
         Map<String, String> queries = new HashMap<>();
-        queries.put("id", "4");
-        queries.put("name", "Fudan");
+        queries.put("id", id);
+        queries.put("name", name);
 
         mUniversityApi.createUniversity(queries)
                 .subscribeOn(Schedulers.newThread())

@@ -57,4 +57,11 @@ public class UniversityRepository implements IUniversityRepository {
         mRemoteDataStore.deleteUniversity(id, callback);
 
     }
+
+    @Override
+    public void addUniversity(String id,String name,DataStore.DeleteUniversityCallback callback) {
+
+        mRemoteDataStore.createUniversity(id,name, callback);
+
+    }
 }

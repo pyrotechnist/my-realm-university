@@ -78,6 +78,12 @@ public class UniversityRecyclerViewAdapter extends RecyclerView.Adapter<Universi
     }
 
 
+    public void AddUniversity(University university){
+        mUniversities.add(university);
+        replaceData(mUniversities);
+    }
+
+
     public static class UniversityViewHolder extends RecyclerView.ViewHolder {
 
         TextView mTextViewId;
