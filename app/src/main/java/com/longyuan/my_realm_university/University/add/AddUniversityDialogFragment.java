@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.longyuan.my_realm_university.R;
+import com.longyuan.my_realm_university.University.UniversityFragment;
 
 /**
  * Created by LONGYUAN on 2017/8/18.
@@ -72,12 +73,13 @@ public class AddUniversityDialogFragment extends DialogFragment {
         // Verify that the host activity implements the callback interface
         try {
 
-            Activity activity;
+                UniversityFragment universityFragment = (UniversityFragment)getFragmentManager().findFragmentById(R.id.frag_content);
 
-            if (context instanceof Activity){
-                activity=(Activity) context;
-                mListener = (AddUniversityDialogListener) activity;
-            }
+                if(universityFragment !=null)
+                {
+                    mListener = (AddUniversityDialogListener) universityFragment;
+                }
+
             // Instantiate the NoticeDialogListener so we can send events to the host
 
         } catch (ClassCastException e) {
@@ -102,6 +104,13 @@ public class AddUniversityDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 mListener.onDialogPositiveClick(mEditTextId.getText().toString(),mEditTextName.getText().toString(),AddUniversityDialogFragment.this);
+            }
+        });
+
+        mButtonNegative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onDialogNegativeClick(AddUniversityDialogFragment.this);
             }
         });
 

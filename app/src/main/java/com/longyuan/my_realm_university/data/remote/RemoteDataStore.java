@@ -79,6 +79,17 @@ public class RemoteDataStore implements DataStore{
                 .subscribe(data -> callback.onUniversityDeleted(data));
     }
 
+    public void updateUniversity(String id,String name,DeleteUniversityCallback callback){
+
+        Map<String, String> queries = new HashMap<>();
+        queries.put("name", name);
+
+        mUniversityApi.updateUniversity(id,queries)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> callback.onUniversityDeleted(data));
+    }
+
 
 
 

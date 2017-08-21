@@ -21,7 +21,7 @@ import com.longyuan.my_realm_university.University.add.AddUniversityDialogFragme
 
 import javax.inject.Inject;
 
-public class UniversityActivity extends AppCompatActivity  implements AddUniversityDialogFragment.AddUniversityDialogListener{
+public class UniversityActivity extends AppCompatActivity{
 
 
     @Inject
@@ -50,14 +50,14 @@ public class UniversityActivity extends AppCompatActivity  implements AddUnivers
                 .build()
                 .inject(this);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
+                *//*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*//*
 
-              /*  AlertDialog.Builder builder = new AlertDialog.Builder(UniversityActivity.this);
+              *//*  AlertDialog.Builder builder = new AlertDialog.Builder(UniversityActivity.this);
                 // Add the buttons
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -72,7 +72,7 @@ public class UniversityActivity extends AppCompatActivity  implements AddUnivers
 
                 AlertDialog dialog = builder.create();
 
-                dialog.show();*/
+                dialog.show();*//*
 
 
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -83,7 +83,7 @@ public class UniversityActivity extends AppCompatActivity  implements AddUnivers
 
 
             }
-        });
+        });*/
     }
 
     @Override
@@ -91,22 +91,6 @@ public class UniversityActivity extends AppCompatActivity  implements AddUnivers
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-
-    @Override
-    public void onDialogPositiveClick(String id, String name,AddUniversityDialogFragment dialog) {
-
-
-        dialog.dismiss();
-
-        mUniversityPresenter.addUniversity(id,name);
-
-
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-
     }
 
     @Override

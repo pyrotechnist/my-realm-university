@@ -27,4 +27,7 @@ public interface UniversityApi {
         @GET("/University/create")
         Observable<University> createUniversity(@QueryMap Map<String, String> options);
 
+        @GET("/University/update/{id}")
+        Observable<University> updateUniversity(@Path("id") String id,@QueryMap Map<String, String> options);
+
 }

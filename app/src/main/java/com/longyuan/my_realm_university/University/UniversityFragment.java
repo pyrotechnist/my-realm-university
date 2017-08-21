@@ -2,7 +2,11 @@ package com.longyuan.my_realm_university.University;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.longyuan.my_realm_university.R;
+import com.longyuan.my_realm_university.University.add.AddUniversityDialogFragment;
 import com.longyuan.my_realm_university.model.University;
 import com.longyuan.my_realm_university.utils.OnItemClickListener;
 import com.longyuan.my_realm_university.utils.UniversityRecyclerViewAdapter;
@@ -21,7 +26,7 @@ import java.util.List;
  * Created by loxu on 07/08/2017.
  */
 
-public class UniversityFragment extends Fragment implements UniversityContarct.View {
+public class UniversityFragment extends Fragment implements UniversityContarct.View,AddUniversityDialogFragment.AddUniversityDialogListener {
 
     private UniversityContarct.Presenter mPresenter;
 
@@ -69,6 +74,19 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
 
+        FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+                AddUniversityDialogFragment addUniversityDialogFragment = new AddUniversityDialogFragment();
+
+                addUniversityDialogFragment.show(fragmentManager,"addUniversityDialogFragment");
+            }
+        });
+
         return root;
     }
 
@@ -95,5 +113,18 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
     public void addUniversityOnRecyclerView(University university){
 
         mUniversityRecyclerViewAdapter.AddUniversity(university);
+    }
+
+    @Override
+    public void onDialogPositiveClick(String id, String name, AddUniversityDialogFragment dialog) {
+
+        dialog.dismiss();
+
+        mPresenter.addUniversity(id,name);
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        dialog.dismiss();
     }
 }
