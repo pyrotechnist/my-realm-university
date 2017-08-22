@@ -8,9 +8,9 @@ import com.longyuan.my_realm_university.model.University;
 
 public interface OnItemClickListener {
 
-    void onItemClick(University item,int position);
+    void onItemClick(University item);
 
-    void onItemLongClick(University item);
+    void onItemLongClick(University item,int position);
 
 
 }

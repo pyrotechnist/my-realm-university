@@ -79,4 +79,9 @@ public class UniversityPresenter implements UniversityContarct.Presenter {
             }
         });
     }
+
+
+    public void loadUniversity(String universityId) {
+
+    }
 }

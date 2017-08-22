@@ -1,5 +1,6 @@
 package com.longyuan.my_realm_university.University;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import com.longyuan.my_realm_university.R;
 import com.longyuan.my_realm_university.University.add.AddUniversityDialogFragment;
 import com.longyuan.my_realm_university.model.University;
+import com.longyuan.my_realm_university.universitydetails.UniversityDetailsActivity;
 import com.longyuan.my_realm_university.utils.OnItemClickListener;
 import com.longyuan.my_realm_university.utils.UniversityRecyclerViewAdapter;
 
@@ -57,14 +59,17 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
 
         mUniversityRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(University item,int position) {
+            public void onItemClick(University item) {
 
-                mPresenter.deleteUniversity(item.getId(),position);
+                mPresenter.loadUniversity(item.getId());
+
+                //mPresenter.deleteUniversity(item.getId());
             }
 
             @Override
-            public void onItemLongClick(University item) {
+            public void onItemLongClick(University item,int position) {
 
+                mPresenter.deleteUniversity(item.getId(),position);
             }
         });
 
@@ -126,5 +131,12 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         dialog.dismiss();
+    }
+
+    @Override
+    public void showUniversityDetailsUi(String universityId) {
+        Intent intent = new Intent(getContext(), UniversityDetailsActivity.class);
+        intent.putExtra(UniversityDetailsActivity.EXTRA_UNIVERSITY_ID, universityId);
+        startActivity(intent);
     }
 }

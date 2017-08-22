@@ -49,11 +49,21 @@ public class UniversityRecyclerViewAdapter extends RecyclerView.Adapter<Universi
             @Override
             public void onClick(View view) {
 
-                mOnItemClickListener.onItemClick(university,position);
+                mOnItemClickListener.onItemClick(university);
+            }
+        };
+
+
+        View.OnLongClickListener longListner = new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View view) {
+                mOnItemClickListener.onItemLongClick(university,position);
+                return false;
             }
         };
 
         holder.itemView.setOnClickListener(listener);
+        holder.itemView.setOnLongClickListener(longListner);
 
 
     }

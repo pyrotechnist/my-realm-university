@@ -15,5 +15,4 @@ public interface UniversityComponent {
 
     void inject(UniversityActivity activity);
 
-
 }
