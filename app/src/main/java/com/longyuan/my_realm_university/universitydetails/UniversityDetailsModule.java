@@ -25,6 +25,11 @@ public class UniversityDetailsModule {
 
     @Provides
     UniversityDetailsContract.Presenter provideUniversityContractPresenter() {
-        return new UniversityDetailsPresenter(mView);
+        return new UniversityDetailsPresenter(mView,mUniversityId);
+    }
+
+    @Provides
+    String provideUniversityId() {
+        return mUniversityId;
     }
 }

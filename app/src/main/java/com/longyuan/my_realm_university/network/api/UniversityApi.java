@@ -21,6 +21,9 @@ public interface UniversityApi {
         @GET("/University")
         Observable<List<University>> getUniversities();
 
+        @GET("/University/{id}")
+        Observable<University> loadUniversity(@Path("id") String id);
+
         @GET("/University/destroy/{id}")
         Observable<University> deleteUniversity(@Path("id") String id);
 

@@ -1,6 +1,8 @@
 package com.longyuan.my_realm_university.universitydetails;
 
 import com.longyuan.my_realm_university.App;
+import com.longyuan.my_realm_university.model.University;
+import com.longyuan.my_realm_university.realm.repository.DataStore;
 import com.longyuan.my_realm_university.realm.repository.impl.UniversityRepository;
 
 import javax.inject.Inject;
@@ -34,11 +36,18 @@ public class UniversityDetailsPresenter implements UniversityDetailsContract.Pre
 
     @Override
     public void start() {
+        loadUniversity(mUniversityId);
 
     }
 
     @Override
     public void loadUniversity(String universityId) {
+        mUniversityRepository.loadUniversity(universityId, new DataStore.DeleteUniversityCallback() {
+            @Override
+            public void onUniversityDeleted(University university) {
+                mView.showUniversity(university);
+            }
+        });
 
     }
 

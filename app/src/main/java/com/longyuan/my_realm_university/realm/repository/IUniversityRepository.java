@@ -13,6 +13,8 @@ public interface IUniversityRepository {
 
     void addUniversity(String id,String name,DataStore.DeleteUniversityCallback callback);
 
+    void loadUniversity(String id,DataStore.DeleteUniversityCallback callback);
+
 
 
 

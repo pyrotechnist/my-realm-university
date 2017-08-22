@@ -37,11 +37,11 @@ public class UniversityDetailsActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.frag_university_details_content,universityDetailsFragment).commit();
 
         }
-
+        String universityId = getIntent().getStringExtra(EXTRA_UNIVERSITY_ID);
 
         DaggerUniversityDetailsComponent.builder()
                 .appComponent(((App)getApplication()).getAppComponent())
-                .universityDetailsModule(new UniversityDetailsModule(universityDetailsFragment))
+                .universityDetailsModule(new UniversityDetailsModule(universityDetailsFragment,universityId))
                 .build()
                 .inject(this);
 
