@@ -54,5 +54,17 @@ public class UniversityDetailsPresenter implements UniversityDetailsContract.Pre
     @Override
     public void updateUniversity(String id, String name) {
 
+        mUniversityRepository.updateUniversity(id,name,new DataStore.DeleteUniversityCallback(){
+
+            @Override
+            public void onUniversityDeleted(University university) {
+
+                if(id.equals(university.getId()))
+                {
+                    mView.refreshUniversitiesDetailsUi(university.getId());
+                }
+
+            }
+        });
     }
 }

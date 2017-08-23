@@ -14,6 +14,8 @@ public interface UniversityDetailsContract {
         void showUniversity(University university);
 
         void setPresnter(Presenter presnter);
+
+        void refreshUniversitiesDetailsUi(String universityId);
     }
 
     interface Presenter {

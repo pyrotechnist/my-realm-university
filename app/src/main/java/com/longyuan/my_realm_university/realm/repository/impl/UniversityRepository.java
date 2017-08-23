@@ -69,4 +69,9 @@ public class UniversityRepository implements IUniversityRepository {
     public void loadUniversity(String id, DataStore.DeleteUniversityCallback callback) {
         mRemoteDataStore.loadUniversity(id, callback);
     }
+
+    @Override
+    public void updateUniversity(String id, String name, DataStore.DeleteUniversityCallback callback) {
+        mRemoteDataStore.updateUniversity(id,name,callback);
+    }
 }

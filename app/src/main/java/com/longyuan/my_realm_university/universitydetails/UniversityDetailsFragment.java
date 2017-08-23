@@ -1,11 +1,15 @@
 package com.longyuan.my_realm_university.universitydetails;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.longyuan.my_realm_university.R;
@@ -20,9 +24,13 @@ public class UniversityDetailsFragment extends Fragment implements UniversityDet
 
     private UniversityDetailsContract.Presenter mPresenter;
 
-    private TextView mTextViewId;
+    private EditText mTextViewId;
 
-    private TextView mTextViewName;
+    private EditText mTextViewName;
+
+    private Button mButtonUpdate;
+
+    private Button mButtonCancel;
 
     public static UniversityDetailsFragment getInstance(){
 
@@ -35,9 +43,30 @@ public class UniversityDetailsFragment extends Fragment implements UniversityDet
 
         View root = inflater.inflate(R.layout.frag_university_details,container,false);
 
-        mTextViewId = (TextView) root.findViewById(R.id.university_details_id);
+        mTextViewId = (EditText) root.findViewById(R.id.university_details_id);
 
-        mTextViewName  = (TextView) root.findViewById(R.id.university_details_name);
+        mTextViewName  = (EditText) root.findViewById(R.id.university_details_name);
+
+        mButtonUpdate= (Button) root.findViewById(R.id.university_details_update_button);
+
+        mButtonCancel= (Button) root.findViewById(R.id.university_details_cancel_button);
+
+        mButtonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.updateUniversity(mTextViewId.getText().toString(),mTextViewName.getText().toString());
+            }
+        });
+
+        mButtonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("updated",false);
+                getActivity().setResult(Activity.RESULT_OK,returnIntent);
+                getActivity().finish();
+            }
+        });
 
         return root;
     }
@@ -57,8 +86,18 @@ public class UniversityDetailsFragment extends Fragment implements UniversityDet
     }
 
     @Override
-    public void setPresnter(UniversityDetailsContract.Presenter presnter) {
-        mPresenter = presnter;
+    public void setPresnter(UniversityDetailsContract.Presenter presenter ) {
+        mPresenter = presenter ;
 
+    }
+
+    @Override
+    public void refreshUniversitiesDetailsUi(String universityId) {
+
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("updated",true);
+        returnIntent.putExtra("updated_id",universityId);
+        getActivity().setResult(Activity.RESULT_OK,returnIntent);
+        getActivity().finish();
     }
 }

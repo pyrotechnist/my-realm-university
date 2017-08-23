@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.longyuan.my_realm_university.R;
 import com.longyuan.my_realm_university.University.add.AddUniversityDialogFragment;
@@ -96,6 +97,15 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(data.getBooleanExtra("updated",false)){
+
+            Toast.makeText(getActivity(), data.getStringExtra("updated_id")+ "updated", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
     public void showUniversities(List<University> universities) {
 
         mUniversityRecyclerViewAdapter.replaceData(universities);
@@ -137,6 +147,6 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
     public void showUniversityDetailsUi(String universityId) {
         Intent intent = new Intent(getContext(), UniversityDetailsActivity.class);
         intent.putExtra(UniversityDetailsActivity.EXTRA_UNIVERSITY_ID, universityId);
-        startActivity(intent);
+        startActivityForResult(intent,UniversityDetailsActivity.REQUEST_UPDATE_UNIVERSITY);
     }
 }

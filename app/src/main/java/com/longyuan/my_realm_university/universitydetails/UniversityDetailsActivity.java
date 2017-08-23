@@ -18,6 +18,8 @@ public class UniversityDetailsActivity extends AppCompatActivity {
 
     public static final String EXTRA_UNIVERSITY_ID = "University_ID";
 
+    public static final int REQUEST_UPDATE_UNIVERSITY = 1;
+
     @Inject
     protected UniversityDetailsContract.Presenter mUniversityDetailsPresenter;
 
