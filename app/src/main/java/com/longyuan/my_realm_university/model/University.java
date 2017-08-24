@@ -1,5 +1,8 @@
 package com.longyuan.my_realm_university.model;
 
+import java.util.List;
+
+import io.realm.RealmList;
 import io.realm.RealmObject;
 
 /**
@@ -11,6 +14,8 @@ public class University extends RealmObject {
     private String id;
 
     private String name;
+
+    private RealmList<Student> students;
 
     public University(){
 
@@ -35,5 +40,13 @@ public class University extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(RealmList<Student> students) {
+        this.students = students;
     }
 }
