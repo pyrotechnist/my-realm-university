@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +16,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.longyuan.my_realm_university.R;
+import com.longyuan.my_realm_university.model.Student;
 import com.longyuan.my_realm_university.model.University;
+import com.longyuan.my_realm_university.utils.StudentRecyclerViewAdapter;
+
+import java.util.ArrayList;
 
 /**
  * Created by loxu on 22/08/2017.
@@ -31,6 +38,10 @@ public class UniversityDetailsFragment extends Fragment implements UniversityDet
     private Button mButtonUpdate;
 
     private Button mButtonCancel;
+
+    private RecyclerView mRecyclerViewStudents;
+
+    private StudentRecyclerViewAdapter mStudentRecyclerViewAdapter;
 
     public static UniversityDetailsFragment getInstance(){
 
@@ -50,6 +61,17 @@ public class UniversityDetailsFragment extends Fragment implements UniversityDet
         mButtonUpdate= (Button) root.findViewById(R.id.university_details_update_button);
 
         mButtonCancel= (Button) root.findViewById(R.id.university_details_cancel_button);
+
+        mRecyclerViewStudents = (RecyclerView) root.findViewById(R.id.university_details_students_list);
+
+        mRecyclerViewStudents.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+
+        mStudentRecyclerViewAdapter = new StudentRecyclerViewAdapter(new ArrayList<Student>());
+
+
+        mRecyclerViewStudents.setAdapter(mStudentRecyclerViewAdapter);
+
+        mRecyclerViewStudents.setLayoutManager(new LinearLayoutManager(mRecyclerViewStudents.getContext()));
 
         mButtonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +105,8 @@ public class UniversityDetailsFragment extends Fragment implements UniversityDet
         mTextViewId.setText(university.getId());
 
         mTextViewName.setText(university.getName());
+
+        mStudentRecyclerViewAdapter.replaceData(university.getStudents());
     }
 
     @Override
