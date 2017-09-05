@@ -3,6 +3,7 @@ package com.longyuan.my_realm_university.network.injection;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.longyuan.my_realm_university.network.api.StudentApi;
 import com.longyuan.my_realm_university.network.api.UniversityApi;
 
 import javax.inject.Singleton;
@@ -57,5 +58,10 @@ public class NetworkModule {
     @Provides
     public UniversityApi provideUniversityApi(Retrofit retrofit) {
         return retrofit.create(UniversityApi.class);
+    }
+
+    @Provides
+    public StudentApi provideStudentApi(Retrofit retrofit) {
+        return retrofit.create(StudentApi.class);
     }
 }

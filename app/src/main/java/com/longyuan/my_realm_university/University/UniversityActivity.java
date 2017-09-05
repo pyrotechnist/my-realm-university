@@ -1,23 +1,15 @@
 package com.longyuan.my_realm_university.University;
 
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.longyuan.my_realm_university.App;
 import com.longyuan.my_realm_university.R;
-import com.longyuan.my_realm_university.University.add.AddUniversityDialogFragment;
 
 import javax.inject.Inject;
 
@@ -25,7 +17,7 @@ public class UniversityActivity extends AppCompatActivity{
 
 
     @Inject
-    protected UniversityContarct.Presenter mUniversityPresenter;
+    protected UniversityContract.Presenter mUniversityPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

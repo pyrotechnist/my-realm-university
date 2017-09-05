@@ -11,19 +11,19 @@ import dagger.Provides;
 @Module
 public class UniversityModule {
 
-    private final UniversityContarct.View mView;
+    private final UniversityContract.View mView;
 
-    public UniversityModule(UniversityContarct.View view) {
+    public UniversityModule(UniversityContract.View view) {
         mView = view;
     }
 
     @Provides
-    UniversityContarct.View provideUniversityContractView() {
+    UniversityContract.View provideUniversityContractView() {
         return mView;
     }
 
     @Provides
-    UniversityContarct.Presenter provideUniversityContractPresenter() {
+    UniversityContract.Presenter provideUniversityContractPresenter() {
         return new UniversityPresenter(mView);
     }
 }

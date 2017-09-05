@@ -6,8 +6,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.longyuan.my_realm_university.App;
 import com.longyuan.my_realm_university.model.University;
+import com.longyuan.my_realm_university.network.api.StudentApi;
 import com.longyuan.my_realm_university.network.api.UniversityApi;
 import com.longyuan.my_realm_university.realm.repository.DataStore;
+import com.longyuan.my_realm_university.realm.repository.IStudentRepository;
+import com.longyuan.my_realm_university.realm.repository.IUniversityRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +29,7 @@ import rx.schedulers.Schedulers;
  * Created by loxu on 09/08/2017.
  */
 
-public class RemoteDataStore implements DataStore{
+public class RemoteDataStore implements IUniversityRepository,IStudentRepository{
 
 /*    @Inject
     Retrofit retrofit;*/
@@ -34,7 +37,10 @@ public class RemoteDataStore implements DataStore{
     @Inject
     UniversityApi mUniversityApi;
 
-    private LoadUniversitiesCallback mLoadUniversitiesCallback;
+    @Inject
+    StudentApi mStudentApi;
+
+
 
 
     public RemoteDataStore() {
@@ -42,9 +48,7 @@ public class RemoteDataStore implements DataStore{
     }
 
     @Override
-    public void loadAllUniversities(LoadUniversitiesCallback callback) {
-
-        mLoadUniversitiesCallback = callback;
+    public void loadAllUniversities(DataStore.LoadUniversitiesCallback callback) {
 
         //.enqueue(retroCallback);
         mUniversityApi.getUniversities()
@@ -54,7 +58,8 @@ public class RemoteDataStore implements DataStore{
 
     }
 
-    public void deleteUniversity(String id,LoadOrUpdateUniversityCallback callback){
+    @Override
+    public void deleteUniversity(String id,DataStore.LoadOrUpdateUniversityCallback callback){
 
         mUniversityApi.deleteUniversity(id)
                 .subscribeOn(Schedulers.newThread())
@@ -62,8 +67,8 @@ public class RemoteDataStore implements DataStore{
                 .subscribe(data -> callback.onUniversityLoadedOrUpdated(data));
     }
 
-
-    public void createUniversity(String id,String name,LoadOrUpdateUniversityCallback callback){
+    @Override
+    public void createUniversity(String id,String name,DataStore.LoadOrUpdateUniversityCallback callback){
 
         Map<String, String> queries = new HashMap<>();
         queries.put("id", id);
@@ -75,7 +80,8 @@ public class RemoteDataStore implements DataStore{
                 .subscribe(data -> callback.onUniversityLoadedOrUpdated(data));
     }
 
-    public void updateUniversity(String id,String name,LoadOrUpdateUniversityCallback callback){
+    @Override
+    public void updateUniversity(String id,String name,DataStore.LoadOrUpdateUniversityCallback callback){
 
         Map<String, String> queries = new HashMap<>();
         queries.put("name", name);
@@ -86,7 +92,8 @@ public class RemoteDataStore implements DataStore{
                 .subscribe(data -> callback.onUniversityLoadedOrUpdated(data));
     }
 
-    public void loadUniversity(String id,LoadOrUpdateUniversityCallback callback){
+    @Override
+    public void loadUniversity(String id,DataStore.LoadOrUpdateUniversityCallback callback){
 
         mUniversityApi.loadUniversity(id)
                 .subscribeOn(Schedulers.newThread())
@@ -94,7 +101,8 @@ public class RemoteDataStore implements DataStore{
                 .subscribe(data -> callback.onUniversityLoadedOrUpdated(data));
     }
 
-    public void addStudentToUniversity(String id,String fk,LoadOrUpdateUniversityCallback callback){
+    @Override
+    public void addStudentToUniversity(String id,String fk,DataStore.LoadOrUpdateUniversityCallback callback){
 
         mUniversityApi.addStudentToUniversity(id,fk)
                 .subscribeOn(Schedulers.newThread())
@@ -102,8 +110,8 @@ public class RemoteDataStore implements DataStore{
                 .subscribe(data -> callback.onUniversityLoadedOrUpdated(data));
     }
 
-
-    public void deleteStudentFromUniversity(String id,String fk,LoadOrUpdateUniversityCallback callback){
+    @Override
+    public void deleteStudentFromUniversity(String id,String fk,DataStore.LoadOrUpdateUniversityCallback callback){
 
         mUniversityApi.deleteStudentFromUniversity(id,fk)
                 .subscribeOn(Schedulers.newThread())
@@ -112,10 +120,31 @@ public class RemoteDataStore implements DataStore{
     }
 
 
+    @Override
+    public void loadAllStudents(DataStore.LoadUniversitiesCallback callback) {
+
+    }
+
+    @Override
+    public void deleteStudent(String id, DataStore.LoadOrUpdateStudentCallback callback) {
+
+    }
+
+    @Override
+    public void addStudent(String id, String name, DataStore.LoadOrUpdateStudentCallback callback) {
+
+    }
 
 
+    @Override
+    public void updateStudent(String id, String name, DataStore.LoadOrUpdateStudentCallback callback) {
 
+    }
 
+    @Override
+    public void loadStudent(String id, DataStore.LoadOrUpdateStudentCallback callback) {
+
+    }
 
     private void createPromotionsAPI() {
         Gson gson = new GsonBuilder()
@@ -140,7 +169,7 @@ public class RemoteDataStore implements DataStore{
         mUniversityApi = retrofit.create(UniversityApi.class);*/
     }
 
-    Callback<List<University>> retroCallback = new Callback<List<University>>() {
+    /*Callback<List<University>> retroCallback = new Callback<List<University>>() {
         @Override
         public void onFailure(Call<List<University>> call, Throwable t) {
 
@@ -153,11 +182,11 @@ public class RemoteDataStore implements DataStore{
                 data.addAll(response.body());
                 mLoadUniversitiesCallback.onUniversitiesLoaded(data);
                 //recyclerView.setAdapter(new RecyclerViewAdapter(data));
-            } else {
+            } else {*//**//*
                 Log.d("QuestionsCallback", "Code: " + response.code() + " Message: " + response.message());
             }
         }
     };
-
+*/
 
 }

@@ -1,16 +1,11 @@
 package com.longyuan.my_realm_university.universitydetails;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.longyuan.my_realm_university.App;
 import com.longyuan.my_realm_university.R;
-import com.longyuan.my_realm_university.University.UniversityContarct;
-import com.longyuan.my_realm_university.model.University;
 
 import javax.inject.Inject;
 

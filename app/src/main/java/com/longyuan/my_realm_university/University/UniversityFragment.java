@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -26,13 +25,15 @@ import com.longyuan.my_realm_university.utils.UniversityRecyclerViewAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by loxu on 07/08/2017.
  */
 
-public class UniversityFragment extends Fragment implements UniversityContarct.View,AddUniversityDialogFragment.AddUniversityDialogListener {
+public class UniversityFragment extends Fragment implements UniversityContract.View,AddUniversityDialogFragment.AddUniversityDialogListener {
 
-    private UniversityContarct.Presenter mPresenter;
+    private UniversityContract.Presenter mPresenter;
 
     private RecyclerView mRecyclerView;
 
@@ -65,7 +66,6 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
 
                 mPresenter.loadUniversity(item.getId());
 
-                //mPresenter.deleteUniversity(item.getId());
             }
 
             @Override
@@ -100,10 +100,13 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(data.getBooleanExtra("updated",false)){
+        if (resultCode == RESULT_OK){
+            if(data.getBooleanExtra("updated",false)){
 
-            Toast.makeText(getActivity(), data.getStringExtra("updated_id")+ "updated", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), data.getStringExtra("updated_id")+ "updated", Toast.LENGTH_LONG).show();
+            }
         }
+
     }
 
     @Override
@@ -113,7 +116,7 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
     }
 
     @Override
-    public void setPresnter(UniversityContarct.Presenter presnter) {
+    public void setPresnter(UniversityContract.Presenter presnter) {
 
         mPresenter = presnter;
 

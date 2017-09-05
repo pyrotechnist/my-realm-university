@@ -25,6 +25,10 @@
         <activity
             android:name=".universitydetails.UniversityDetailsActivity"
             android:label="@string/title_activity_university_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".student.StudentActivity"
+            android:label="@string/title_activity_student"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

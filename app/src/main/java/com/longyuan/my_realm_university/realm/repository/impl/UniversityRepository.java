@@ -55,7 +55,7 @@ public class UniversityRepository implements IUniversityRepository {
     }
 
     @Override
-    public void addUniversity(String id,String name,DataStore.LoadOrUpdateUniversityCallback callback) {
+    public void createUniversity(String id,String name,DataStore.LoadOrUpdateUniversityCallback callback) {
 
         mRemoteDataStore.createUniversity(id,name, callback);
 

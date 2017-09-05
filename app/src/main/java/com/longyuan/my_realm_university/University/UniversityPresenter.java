@@ -13,16 +13,16 @@ import javax.inject.Inject;
  * Created by loxu on 07/08/2017.
  */
 
-public class UniversityPresenter implements UniversityContarct.Presenter {
+public class UniversityPresenter implements UniversityContract.Presenter {
 
 
-    private UniversityContarct.View mView;
+    private UniversityContract.View mView;
 
     @Inject
     protected UniversityRepository mUniversityRepository;
 
 
-    public UniversityPresenter(UniversityContarct.View view) {
+    public UniversityPresenter(UniversityContract.View view) {
 
         mView = view;
 
@@ -68,7 +68,7 @@ public class UniversityPresenter implements UniversityContarct.Presenter {
 
     @Override
     public void addUniversity(String id, String name) {
-        mUniversityRepository.addUniversity(id,name,new DataStore.LoadOrUpdateUniversityCallback(){
+        mUniversityRepository.createUniversity(id,name,new DataStore.LoadOrUpdateUniversityCallback(){
             @Override
             public void onUniversityLoadedOrUpdated(University university) {
 

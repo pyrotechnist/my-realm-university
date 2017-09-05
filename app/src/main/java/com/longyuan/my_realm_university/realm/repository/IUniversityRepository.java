@@ -11,7 +11,7 @@ public interface IUniversityRepository {
 
     void deleteUniversity(String id,DataStore.LoadOrUpdateUniversityCallback callback);
 
-    void addUniversity(String id,String name,DataStore.LoadOrUpdateUniversityCallback callback);
+    void createUniversity(String id,String name,DataStore.LoadOrUpdateUniversityCallback callback);
 
     void updateUniversity(String id,String name,DataStore.LoadOrUpdateUniversityCallback callback);
 

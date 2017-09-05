@@ -37,10 +37,6 @@ public class LocalDataStore implements DataStore{
 
     }
 
-
-
-
-    @Override
     public void loadAllUniversities(DataStore.LoadUniversitiesCallback callback) {
 
         //callback.onUniversitiesLoaded(new ArrayList<University>(UNIVERSITY_SERVICE_DATA.values()));
