@@ -1,6 +1,9 @@
 package com.longyuan.my_realm_university.universitydetails;
 
+import com.longyuan.my_realm_university.model.Student;
 import com.longyuan.my_realm_university.model.University;
+
+import java.util.List;
 
 /**
  * Created by loxu on 22/08/2017.
@@ -13,7 +16,9 @@ public interface UniversityDetailsContract {
 
         void showUniversity(University university);
 
-        void setPresnter(Presenter presnter);
+        void updateStudents(List<Student> students);
+
+        void setPresenter(Presenter presenter);
 
         void refreshUniversitiesDetailsUi(String universityId);
     }
@@ -25,5 +30,7 @@ public interface UniversityDetailsContract {
         void loadUniversity(String universityId);
 
         void updateUniversity(String id, String name);
+
+        void deleteStudentFromUniversity(String id, String fk);
     }
 }

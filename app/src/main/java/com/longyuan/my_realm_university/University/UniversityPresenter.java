@@ -53,9 +53,9 @@ public class UniversityPresenter implements UniversityContarct.Presenter {
     @Override
     public void deleteUniversity(String id,int position) {
 
-        mUniversityRepository.deleteUniversity(id, new DataStore.DeleteUniversityCallback() {
+        mUniversityRepository.deleteUniversity(id, new DataStore.LoadOrUpdateUniversityCallback() {
             @Override
-            public void onUniversityDeleted(University university) {
+            public void onUniversityLoadedOrUpdated(University university) {
                 if(id.equals(university.getId()))
                 {
                     mView.deleteUniversityOnRecyclerView(position);
@@ -68,9 +68,9 @@ public class UniversityPresenter implements UniversityContarct.Presenter {
 
     @Override
     public void addUniversity(String id, String name) {
-        mUniversityRepository.addUniversity(id,name,new DataStore.DeleteUniversityCallback(){
+        mUniversityRepository.addUniversity(id,name,new DataStore.LoadOrUpdateUniversityCallback(){
             @Override
-            public void onUniversityDeleted(University university) {
+            public void onUniversityLoadedOrUpdated(University university) {
 
                 if(id.equals(university.getId()))
                 {

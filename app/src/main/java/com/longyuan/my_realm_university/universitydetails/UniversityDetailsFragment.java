@@ -13,14 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.longyuan.my_realm_university.R;
+import com.longyuan.my_realm_university.model.DisplayItem;
 import com.longyuan.my_realm_university.model.Student;
 import com.longyuan.my_realm_university.model.University;
+import com.longyuan.my_realm_university.utils.OnItemClickListener;
 import com.longyuan.my_realm_university.utils.StudentRecyclerViewAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by loxu on 22/08/2017.
@@ -68,6 +71,21 @@ public class UniversityDetailsFragment extends Fragment implements UniversityDet
 
         mStudentRecyclerViewAdapter = new StudentRecyclerViewAdapter(new ArrayList<Student>());
 
+        mStudentRecyclerViewAdapter.setmOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(DisplayItem item) {
+                String university = mTextViewName.getText().toString();
+                Toast.makeText(getActivity(), "University : "+ university+ " Student: " + item.getId() + " Clicked", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onItemLongClick(DisplayItem item, int position) {
+                String universityId = mTextViewId.getText().toString();
+
+                mPresenter.deleteStudentFromUniversity(universityId,item.getId());
+
+            }
+        });
 
         mRecyclerViewStudents.setAdapter(mStudentRecyclerViewAdapter);
 
@@ -110,7 +128,7 @@ public class UniversityDetailsFragment extends Fragment implements UniversityDet
     }
 
     @Override
-    public void setPresnter(UniversityDetailsContract.Presenter presenter ) {
+    public void setPresenter(UniversityDetailsContract.Presenter presenter ) {
         mPresenter = presenter ;
 
     }
@@ -123,5 +141,10 @@ public class UniversityDetailsFragment extends Fragment implements UniversityDet
         returnIntent.putExtra("updated_id",universityId);
         getActivity().setResult(Activity.RESULT_OK,returnIntent);
         getActivity().finish();
+    }
+
+    @Override
+    public void updateStudents(List<Student> students) {
+        mStudentRecyclerViewAdapter.replaceData(students);
     }
 }

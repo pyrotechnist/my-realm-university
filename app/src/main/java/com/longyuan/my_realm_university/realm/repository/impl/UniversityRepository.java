@@ -1,7 +1,5 @@
 package com.longyuan.my_realm_university.realm.repository.impl;
 
-import android.content.Context;
-
 import com.longyuan.my_realm_university.data.local.LocalDataStore;
 import com.longyuan.my_realm_university.data.remote.RemoteDataStore;
 import com.longyuan.my_realm_university.model.University;
@@ -9,9 +7,7 @@ import com.longyuan.my_realm_university.realm.repository.DataStore;
 import com.longyuan.my_realm_university.realm.repository.IUniversityRepository;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -52,26 +48,36 @@ public class UniversityRepository implements IUniversityRepository {
     }
 
     @Override
-    public void deleteUniversity(String id,DataStore.DeleteUniversityCallback callback) {
+    public void deleteUniversity(String id,DataStore.LoadOrUpdateUniversityCallback callback) {
 
         mRemoteDataStore.deleteUniversity(id, callback);
 
     }
 
     @Override
-    public void addUniversity(String id,String name,DataStore.DeleteUniversityCallback callback) {
+    public void addUniversity(String id,String name,DataStore.LoadOrUpdateUniversityCallback callback) {
 
         mRemoteDataStore.createUniversity(id,name, callback);
 
     }
 
     @Override
-    public void loadUniversity(String id, DataStore.DeleteUniversityCallback callback) {
+    public void loadUniversity(String id, DataStore.LoadOrUpdateUniversityCallback callback) {
         mRemoteDataStore.loadUniversity(id, callback);
     }
 
     @Override
-    public void updateUniversity(String id, String name, DataStore.DeleteUniversityCallback callback) {
+    public void updateUniversity(String id, String name, DataStore.LoadOrUpdateUniversityCallback callback) {
         mRemoteDataStore.updateUniversity(id,name,callback);
+    }
+
+    @Override
+    public void addStudentToUniversity(String id,String fk,DataStore.LoadOrUpdateUniversityCallback callback) {
+
+    }
+
+    @Override
+    public void deleteStudentFromUniversity(String id,String fk,DataStore.LoadOrUpdateUniversityCallback callback) {
+        mRemoteDataStore.deleteStudentFromUniversity(id,fk,callback);
     }
 }

@@ -43,7 +43,7 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // mOnItemClickListener.onItemClick(student);
+               mOnItemClickListener.onItemClick(student);
 
             }
         });
@@ -51,8 +51,8 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-               // mOnItemClickListener.onItemLongClick(student,position);
-                return false;
+                mOnItemClickListener.onItemLongClick(student,position);
+                return true;
             }
         });
 

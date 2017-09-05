@@ -6,12 +6,13 @@ import io.realm.RealmObject;
  * Created by loxu on 07/08/2017.
  */
 
-public class Student extends RealmObject {
+public class Student extends RealmObject implements DisplayItem {
 
     private String id;
 
     private String age;
 
+    @Override
     public String getId() {
         return id;
     }

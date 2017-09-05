@@ -58,7 +58,7 @@ public class UniversityRecyclerViewAdapter extends RecyclerView.Adapter<Universi
             @Override
             public boolean onLongClick(View view) {
                 mOnItemClickListener.onItemLongClick(university,position);
-                return false;
+                return true;
             }
         };
 

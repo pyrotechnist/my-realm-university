@@ -1,5 +1,6 @@
 package com.longyuan.my_realm_university.utils;
 
+import com.longyuan.my_realm_university.model.DisplayItem;
 import com.longyuan.my_realm_university.model.University;
 
 /**
@@ -8,9 +9,9 @@ import com.longyuan.my_realm_university.model.University;
 
 public interface OnItemClickListener {
 
-    void onItemClick(University item);
+    void onItemClick(DisplayItem item);
 
-    void onItemLongClick(University item,int position);
+    void onItemLongClick(DisplayItem item,int position);
 
 
 }

@@ -16,9 +16,9 @@ public interface DataStore {
 
     }
 
-    interface DeleteUniversityCallback {
+    interface LoadOrUpdateUniversityCallback {
 
-        void onUniversityDeleted(University university);
+        void onUniversityLoadedOrUpdated(University university);
 
     }
 

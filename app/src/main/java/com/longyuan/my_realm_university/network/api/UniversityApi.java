@@ -7,7 +7,9 @@ import java.util.Map;
 
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 import rx.Observable;
@@ -32,5 +34,11 @@ public interface UniversityApi {
 
         @GET("/University/update/{id}")
         Observable<University> updateUniversity(@Path("id") String id,@QueryMap Map<String, String> options);
+
+        @POST("/University/{id}/Students/{fk}")
+        Observable<University> addStudentToUniversity(@Path("id") String id,@Path("fk") String fk);
+
+        @DELETE("/University/{id}/Students/{fk}")
+        Observable<University> deleteStudentFromUniversity(@Path("id") String id,@Path("fk") String fk);
 
 }

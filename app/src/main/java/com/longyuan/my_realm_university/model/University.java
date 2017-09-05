@@ -9,7 +9,7 @@ import io.realm.RealmObject;
  * Created by loxu on 07/08/2017.
  */
 
-public class University extends RealmObject {
+public class University extends RealmObject implements DisplayItem {
 
     private String id;
 
@@ -26,6 +26,7 @@ public class University extends RealmObject {
         this.name = name;
     }
 
+    @Override
     public String getId() {
         return id;
     }

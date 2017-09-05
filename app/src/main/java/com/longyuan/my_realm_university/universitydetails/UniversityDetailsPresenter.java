@@ -30,7 +30,7 @@ public class UniversityDetailsPresenter implements UniversityDetailsContract.Pre
 
         App.getAppComponent().inject(this);
 
-        view.setPresnter(this);
+        view.setPresenter(this);
     }
 
 
@@ -42,9 +42,9 @@ public class UniversityDetailsPresenter implements UniversityDetailsContract.Pre
 
     @Override
     public void loadUniversity(String universityId) {
-        mUniversityRepository.loadUniversity(universityId, new DataStore.DeleteUniversityCallback() {
+        mUniversityRepository.loadUniversity(universityId, new DataStore.LoadOrUpdateUniversityCallback() {
             @Override
-            public void onUniversityDeleted(University university) {
+            public void onUniversityLoadedOrUpdated(University university) {
                 mView.showUniversity(university);
             }
         });
@@ -54,16 +54,29 @@ public class UniversityDetailsPresenter implements UniversityDetailsContract.Pre
     @Override
     public void updateUniversity(String id, String name) {
 
-        mUniversityRepository.updateUniversity(id,name,new DataStore.DeleteUniversityCallback(){
+        mUniversityRepository.updateUniversity(id,name,new DataStore.LoadOrUpdateUniversityCallback(){
 
             @Override
-            public void onUniversityDeleted(University university) {
+            public void onUniversityLoadedOrUpdated(University university) {
 
                 if(id.equals(university.getId()))
                 {
                     mView.refreshUniversitiesDetailsUi(university.getId());
                 }
 
+            }
+        });
+    }
+
+    @Override
+    public void deleteStudentFromUniversity(String id, String fk) {
+
+        mUniversityRepository.deleteStudentFromUniversity(id,fk,new DataStore.LoadOrUpdateUniversityCallback(){
+
+            @Override
+            public void onUniversityLoadedOrUpdated(University university) {
+
+                mView.updateStudents(university.getStudents());
             }
         });
     }

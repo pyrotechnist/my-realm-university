@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.longyuan.my_realm_university.R;
 import com.longyuan.my_realm_university.University.add.AddUniversityDialogFragment;
+import com.longyuan.my_realm_university.model.DisplayItem;
 import com.longyuan.my_realm_university.model.University;
 import com.longyuan.my_realm_university.universitydetails.UniversityDetailsActivity;
 import com.longyuan.my_realm_university.utils.OnItemClickListener;
@@ -60,7 +61,7 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
 
         mUniversityRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(University item) {
+            public void onItemClick(DisplayItem item) {
 
                 mPresenter.loadUniversity(item.getId());
 
@@ -68,7 +69,7 @@ public class UniversityFragment extends Fragment implements UniversityContarct.V
             }
 
             @Override
-            public void onItemLongClick(University item,int position) {
+            public void onItemLongClick(DisplayItem item,int position) {
 
                 mPresenter.deleteUniversity(item.getId(),position);
             }

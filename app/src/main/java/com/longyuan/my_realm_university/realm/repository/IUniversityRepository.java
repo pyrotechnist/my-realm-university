@@ -9,15 +9,15 @@ public interface IUniversityRepository {
 
     void loadAllUniversities(DataStore.LoadUniversitiesCallback callback);
 
-    void deleteUniversity(String id,DataStore.DeleteUniversityCallback callback);
+    void deleteUniversity(String id,DataStore.LoadOrUpdateUniversityCallback callback);
 
-    void addUniversity(String id,String name,DataStore.DeleteUniversityCallback callback);
+    void addUniversity(String id,String name,DataStore.LoadOrUpdateUniversityCallback callback);
 
-    void updateUniversity(String id,String name,DataStore.DeleteUniversityCallback callback);
+    void updateUniversity(String id,String name,DataStore.LoadOrUpdateUniversityCallback callback);
 
-    void loadUniversity(String id,DataStore.DeleteUniversityCallback callback);
+    void loadUniversity(String id,DataStore.LoadOrUpdateUniversityCallback callback);
 
+    void addStudentToUniversity(String id,String fk,DataStore.LoadOrUpdateUniversityCallback callback);
 
-
-
+    void deleteStudentFromUniversity(String id,String fk,DataStore.LoadOrUpdateUniversityCallback callback);
 }
