@@ -31,7 +31,7 @@ public interface DataStore {
 
     interface LoadOrUpdateStudentCallback {
 
-        void onUniversityLoadedOrUpdated(Student student);
+        void onStudentLoadedOrUpdated(Student student);
 
     }
 

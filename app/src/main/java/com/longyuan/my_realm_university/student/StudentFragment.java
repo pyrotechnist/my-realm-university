@@ -3,6 +3,7 @@ package com.longyuan.my_realm_university.student;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.longyuan.my_realm_university.utils.OnItemClickListener;
 import com.longyuan.my_realm_university.utils.StudentRecyclerViewAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by loxu on 05/09/2017.
@@ -43,6 +45,8 @@ public class StudentFragment extends Fragment implements StudentContract.View {
         mRecyclerView = (RecyclerView) root.findViewById(R.id.students_list);
 
         mStudentRecyclerViewAdapter = new StudentRecyclerViewAdapter(new ArrayList<Student>());
+
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
         mStudentRecyclerViewAdapter.setmOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -77,5 +81,10 @@ public class StudentFragment extends Fragment implements StudentContract.View {
     public void setPresenter(StudentContract.Presenter presenter) {
 
         mPresenter = presenter;
+    }
+
+    @Override
+    public void showStudents(List<Student> students) {
+        mStudentRecyclerViewAdapter.replaceData(students);
     }
 }

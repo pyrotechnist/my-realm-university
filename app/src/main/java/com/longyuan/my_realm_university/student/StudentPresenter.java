@@ -1,7 +1,11 @@
 package com.longyuan.my_realm_university.student;
 
 import com.longyuan.my_realm_university.App;
+import com.longyuan.my_realm_university.model.Student;
+import com.longyuan.my_realm_university.realm.repository.DataStore;
 import com.longyuan.my_realm_university.realm.repository.impl.StudentRepository;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -28,5 +32,16 @@ public class StudentPresenter implements StudentContract.Presenter {
     @Override
     public void start() {
 
+        loadStudents();
+    }
+
+    @Override
+    public void loadStudents() {
+        mStudentRepository.loadAllStudents(new DataStore.LoadStudentsCallback() {
+            @Override
+            public void onStudentsLoaded(List<Student> students) {
+                mView.showStudents(students);
+            }
+        });
     }
 }

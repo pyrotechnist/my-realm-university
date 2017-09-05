@@ -10,7 +10,14 @@ import android.view.View;
 import com.longyuan.my_realm_university.App;
 import com.longyuan.my_realm_university.R;
 
+import javax.inject.Inject;
+
 public class StudentActivity extends AppCompatActivity {
+
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! important
+    @Inject
+    protected StudentContract.Presenter mStudentPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

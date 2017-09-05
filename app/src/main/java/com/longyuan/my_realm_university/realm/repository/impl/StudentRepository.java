@@ -30,8 +30,9 @@ public class StudentRepository implements IStudentRepository {
 
 
     @Override
-    public void loadAllStudents(DataStore.LoadUniversitiesCallback callback) {
+    public void loadAllStudents(DataStore.LoadStudentsCallback callback) {
 
+        mRemoteDataStore.loadAllStudents(callback);
     }
 
     @Override

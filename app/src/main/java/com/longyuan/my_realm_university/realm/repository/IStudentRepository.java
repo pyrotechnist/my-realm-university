@@ -7,7 +7,7 @@ package com.longyuan.my_realm_university.realm.repository;
 public interface IStudentRepository {
 
 
-    void loadAllStudents(DataStore.LoadUniversitiesCallback callback);
+    void loadAllStudents(DataStore.LoadStudentsCallback callback);
 
     void deleteStudent(String id, DataStore.LoadOrUpdateStudentCallback callback);
 

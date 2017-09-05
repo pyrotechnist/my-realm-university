@@ -1,6 +1,7 @@
 package com.longyuan.my_realm_university.University;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +11,11 @@ import android.view.MenuItem;
 
 import com.longyuan.my_realm_university.App;
 import com.longyuan.my_realm_university.R;
+import com.longyuan.my_realm_university.student.StudentActivity;
 
 import javax.inject.Inject;
+
+import static java.security.AccessController.getContext;
 
 public class UniversityActivity extends AppCompatActivity{
 
@@ -95,6 +99,11 @@ public class UniversityActivity extends AppCompatActivity{
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.action_students) {
+            Intent intent = new Intent(this, StudentActivity.class);
+            startActivity(intent);
+
         }
 
         return super.onOptionsItemSelected(item);

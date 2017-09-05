@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">"my-realm-university "</string>
     <string name="action_settings">Settings</string>
+    <string name="action_students">Students</string>
     <string name="title_activity_university_details">UniversityDetailsActivity</string>
     <string name="title_activity_student">StudentActivity</string>
 </resources>

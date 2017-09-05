@@ -12,8 +12,8 @@ public class StudentModule {
 
     private final StudentContract.View mView;
 
-    public StudentModule(StudentContract.View mView) {
-        this.mView = mView;
+    public StudentModule(StudentContract.View view) {
+        this.mView = view;
     }
 
     @Provides

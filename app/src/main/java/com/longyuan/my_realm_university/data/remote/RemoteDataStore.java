@@ -121,7 +121,12 @@ public class RemoteDataStore implements IUniversityRepository,IStudentRepository
 
 
     @Override
-    public void loadAllStudents(DataStore.LoadUniversitiesCallback callback) {
+    public void loadAllStudents(DataStore.LoadStudentsCallback callback) {
+
+        mStudentApi.getStudents()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> callback.onStudentsLoaded(data));
 
     }
 
