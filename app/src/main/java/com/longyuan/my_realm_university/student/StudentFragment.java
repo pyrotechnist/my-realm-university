@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.longyuan.my_realm_university.R;
 import com.longyuan.my_realm_university.model.DisplayItem;
 import com.longyuan.my_realm_university.model.Student;
+import com.longyuan.my_realm_university.model.StudentFullInfo;
 import com.longyuan.my_realm_university.utils.OnItemClickListener;
 import com.longyuan.my_realm_university.utils.StudentRecyclerViewAdapter;
 
@@ -44,7 +45,7 @@ public class StudentFragment extends Fragment implements StudentContract.View {
 
         mRecyclerView = (RecyclerView) root.findViewById(R.id.students_list);
 
-        mStudentRecyclerViewAdapter = new StudentRecyclerViewAdapter(new ArrayList<Student>());
+        mStudentRecyclerViewAdapter = new StudentRecyclerViewAdapter(new ArrayList<StudentFullInfo>());
 
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
@@ -84,7 +85,7 @@ public class StudentFragment extends Fragment implements StudentContract.View {
     }
 
     @Override
-    public void showStudents(List<Student> students) {
+    public void showStudents(List<StudentFullInfo> students) {
         mStudentRecyclerViewAdapter.replaceData(students);
     }
 }

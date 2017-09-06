@@ -6,13 +6,13 @@ import io.realm.RealmObject;
  * Created by loxu on 07/08/2017.
  */
 
-public class Student extends RealmObject implements DisplayItem {
+public class StudentFullInfo extends RealmObject implements DisplayItem {
 
     private String id;
 
     private String age;
 
-    private String school;
+    private University school;
 
     @Override
     public String getId() {
@@ -31,11 +31,11 @@ public class Student extends RealmObject implements DisplayItem {
         this.age = age;
     }
 
-    public String getSchool() {
+    public University getSchool() {
         return school;
     }
 
-    public void setSchool(String school) {
+    public void setSchool(University school) {
         this.school = school;
     }
 }

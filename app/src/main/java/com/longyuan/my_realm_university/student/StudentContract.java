@@ -1,6 +1,7 @@
 package com.longyuan.my_realm_university.student;
 
 import com.longyuan.my_realm_university.model.Student;
+import com.longyuan.my_realm_university.model.StudentFullInfo;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface StudentContract {
 
         void setPresenter(Presenter presenter);
 
-        void showStudents(List<Student> students);
+        void showStudents(List<StudentFullInfo> students);
     }
 
     interface  Presenter{

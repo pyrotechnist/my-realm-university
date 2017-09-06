@@ -1,6 +1,7 @@
 package com.longyuan.my_realm_university.realm.repository;
 
 import com.longyuan.my_realm_university.model.Student;
+import com.longyuan.my_realm_university.model.StudentFullInfo;
 import com.longyuan.my_realm_university.model.University;
 
 import java.util.List;
@@ -25,13 +26,13 @@ public interface DataStore {
 
     interface LoadStudentsCallback {
 
-        void onStudentsLoaded(List<Student> students);
+        void onStudentsLoaded(List<StudentFullInfo> students);
 
     }
 
     interface LoadOrUpdateStudentCallback {
 
-        void onStudentLoadedOrUpdated(Student student);
+        void onStudentLoadedOrUpdated(StudentFullInfo student);
 
     }
 

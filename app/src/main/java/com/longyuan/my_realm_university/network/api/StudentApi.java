@@ -1,6 +1,7 @@
 package com.longyuan.my_realm_university.network.api;
 
 import com.longyuan.my_realm_university.model.Student;
+import com.longyuan.my_realm_university.model.StudentFullInfo;
 
 import java.util.List;
 import java.util.Map;
@@ -19,18 +20,18 @@ import rx.Observable;
 public interface StudentApi {
 
     @GET("/student")
-    Observable<List<Student>> getStudents();
+    Observable<List<StudentFullInfo>> getStudents();
 
     @GET("/student/{id}")
-    Observable<Student> loadStudent(@Path("id") String id);
+    Observable<StudentFullInfo> loadStudent(@Path("id") String id);
 
     @GET("/student/destroy/{id}")
-    Observable<Student> deleteStudent(@Path("id") String id);
+    Observable<StudentFullInfo> deleteStudent(@Path("id") String id);
 
     @GET("/student/create")
-    Observable<Student> createStudent(@QueryMap Map<String, String> options);
+    Observable<StudentFullInfo> createStudent(@QueryMap Map<String, String> options);
 
     @GET("/student/update/{id}")
-    Observable<Student> updateStudent(@Path("id") String id,@QueryMap Map<String, String> options);
+    Observable<StudentFullInfo> updateStudent(@Path("id") String id,@QueryMap Map<String, String> options);
 
 }

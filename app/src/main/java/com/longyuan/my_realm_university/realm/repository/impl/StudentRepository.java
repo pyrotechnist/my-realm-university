@@ -2,6 +2,7 @@ package com.longyuan.my_realm_university.realm.repository.impl;
 
 import com.longyuan.my_realm_university.data.local.LocalDataStore;
 import com.longyuan.my_realm_university.data.remote.RemoteDataStore;
+import com.longyuan.my_realm_university.model.StudentFullInfo;
 import com.longyuan.my_realm_university.model.University;
 import com.longyuan.my_realm_university.realm.repository.DataStore;
 import com.longyuan.my_realm_university.realm.repository.IStudentRepository;
@@ -21,6 +22,8 @@ public class StudentRepository implements IStudentRepository {
     private LocalDataStore mLocalDataStore;
     private RemoteDataStore mRemoteDataStore;
 
+    private List<StudentFullInfo> mStudents;
+
 
     @Inject
     public StudentRepository(RemoteDataStore remoteDataStore, LocalDataStore localDataStore) {
@@ -32,7 +35,14 @@ public class StudentRepository implements IStudentRepository {
     @Override
     public void loadAllStudents(DataStore.LoadStudentsCallback callback) {
 
-        mRemoteDataStore.loadAllStudents(callback);
+        if(mStudents !=null)
+        {
+            callback.onStudentsLoaded(mStudents);
+        }else
+        {
+            mRemoteDataStore.loadAllStudents(callback);
+        }
+
     }
 
     @Override
@@ -53,5 +63,30 @@ public class StudentRepository implements IStudentRepository {
     @Override
     public void loadStudent(String id, DataStore.LoadOrUpdateStudentCallback callback) {
 
+    }
+
+    private void getStudentFromRemoteDataStore(DataStore.LoadStudentsCallback callback){
+
+        mRemoteDataStore.loadAllStudents(new DataStore.LoadStudentsCallback() {
+            @Override
+            public void onStudentsLoaded(List<StudentFullInfo> students) {
+                refreshCache(students);
+
+                callback.onStudentsLoaded(students);
+
+            }
+        });
+
+    }
+
+    private void refreshCache(List<StudentFullInfo> studentFullInfos){
+        if(mStudents == null)
+        {
+            mStudents = new ArrayList<StudentFullInfo>();
+        }
+
+        mStudents.clear();
+
+        mStudents = studentFullInfos;
     }
 }

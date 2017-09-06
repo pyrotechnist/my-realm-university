@@ -20,6 +20,7 @@ import com.longyuan.my_realm_university.model.DisplayItem;
 import com.longyuan.my_realm_university.model.Student;
 import com.longyuan.my_realm_university.model.University;
 import com.longyuan.my_realm_university.utils.OnItemClickListener;
+import com.longyuan.my_realm_university.utils.StudentOnUniversityViewRecyclerViewAdapter;
 import com.longyuan.my_realm_university.utils.StudentRecyclerViewAdapter;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class UniversityDetailsFragment extends Fragment implements UniversityDet
 
     private RecyclerView mRecyclerViewStudents;
 
-    private StudentRecyclerViewAdapter mStudentRecyclerViewAdapter;
+    private StudentOnUniversityViewRecyclerViewAdapter mStudentRecyclerViewAdapter;
 
     public static UniversityDetailsFragment getInstance(){
 
@@ -69,7 +70,7 @@ public class UniversityDetailsFragment extends Fragment implements UniversityDet
 
         mRecyclerViewStudents.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
-        mStudentRecyclerViewAdapter = new StudentRecyclerViewAdapter(new ArrayList<Student>());
+        mStudentRecyclerViewAdapter = new StudentOnUniversityViewRecyclerViewAdapter(new ArrayList<Student>());
 
         mStudentRecyclerViewAdapter.setmOnItemClickListener(new OnItemClickListener() {
             @Override

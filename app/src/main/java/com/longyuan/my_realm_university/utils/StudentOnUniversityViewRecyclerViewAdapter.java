@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.longyuan.my_realm_university.R;
 import com.longyuan.my_realm_university.model.Student;
-import com.longyuan.my_realm_university.model.StudentFullInfo;
 
 import java.util.List;
 
@@ -16,29 +15,29 @@ import java.util.List;
  * Created by loxu on 04/09/2017.
  */
 
-public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecyclerViewAdapter.StudentViewHolder> {
+public class StudentOnUniversityViewRecyclerViewAdapter extends RecyclerView.Adapter<StudentOnUniversityViewRecyclerViewAdapter.StudentViewHolder> {
 
-    private List<StudentFullInfo> mStudentsList;
+    private List<Student> mStudentsList;
 
     private OnItemClickListener mOnItemClickListener;
 
 
-    public StudentRecyclerViewAdapter(List<StudentFullInfo> students) {
+    public StudentOnUniversityViewRecyclerViewAdapter(List<Student> students) {
         this.mStudentsList = students;
     }
 
     @Override
-    public StudentRecyclerViewAdapter.StudentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public StudentOnUniversityViewRecyclerViewAdapter.StudentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.student_item,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.student_in_university_item,parent,false);
 
         return new StudentViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(StudentRecyclerViewAdapter.StudentViewHolder holder, int position) {
+    public void onBindViewHolder(StudentOnUniversityViewRecyclerViewAdapter.StudentViewHolder holder, int position) {
 
-        final StudentFullInfo student = mStudentsList.get(position);
+        final Student student = mStudentsList.get(position);
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -62,11 +61,6 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
 
         holder.mTextViewAge.setText(student.getAge());
 
-        if(student.getSchool() != null)
-        {
-            holder.mTextViewUniversity.setText(student.getSchool().getName());
-        }
-
     }
 
     @Override
@@ -80,20 +74,16 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
 
         TextView mTextViewAge;
 
-        TextView mTextViewUniversity;
-
         public StudentViewHolder(View itemView) {
             super(itemView);
 
-            mTextViewId = (TextView) itemView.findViewById(R.id.student_item_id);
+            mTextViewId = (TextView) itemView.findViewById(R.id.student_in_university_item_id);
 
-            mTextViewAge = (TextView) itemView.findViewById(R.id.student_item_age);
-
-            mTextViewUniversity = (TextView) itemView.findViewById(R.id.student_item_university);
+            mTextViewAge = (TextView) itemView.findViewById(R.id.student_in_university_item_age);
         }
     }
 
-    public void replaceData(List<StudentFullInfo> students){
+    public void replaceData(List<Student> students){
 
         mStudentsList = students;
 
