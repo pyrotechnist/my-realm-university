@@ -48,7 +48,7 @@ public class RemoteDataStore implements IUniversityRepository,IStudentRepository
     }
 
     @Override
-    public void loadAllUniversities(DataStore.LoadUniversitiesCallback callback) {
+    public void loadAllUniversities(DataStore.LoadUniversitiesCallback callback,boolean forceUpdate) {
 
         //.enqueue(retroCallback);
         mUniversityApi.getUniversities()

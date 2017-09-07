@@ -20,6 +20,8 @@ public class UniversityRepository implements IUniversityRepository {
     private LocalDataStore mLocalDataStore;
     private RemoteDataStore mRemoteDataStore;
 
+    private List<University> mUniversitiesCache;
+
     private DataStore.LoadUniversitiesCallback mLoadUniversitiesCallback;
 
     @Inject
@@ -29,8 +31,15 @@ public class UniversityRepository implements IUniversityRepository {
     }
 
 
-    @Override
+
     public void loadAllUniversities(DataStore.LoadUniversitiesCallback callback) {
+
+
+        loadAllUniversities(callback,false);
+   }
+
+    @Override
+    public void loadAllUniversities(DataStore.LoadUniversitiesCallback callback,boolean forceUpdate) {
 
 
         List<University> universities = new ArrayList<University>();
@@ -41,10 +50,13 @@ public class UniversityRepository implements IUniversityRepository {
 
         //mLocalDataStore.loadAllUniversities(callback);
 
-        mRemoteDataStore.loadAllUniversities(callback);
-
-
-
+        if(mUniversitiesCache != null && !forceUpdate)
+        {
+            callback.onUniversitiesLoaded(mUniversitiesCache);
+        }else
+        {
+            getUniversitiesFromRemoteDataStore(callback);
+        }
     }
 
     @Override
@@ -79,5 +91,27 @@ public class UniversityRepository implements IUniversityRepository {
     @Override
     public void deleteStudentFromUniversity(String id,String fk,DataStore.LoadOrUpdateUniversityCallback callback) {
         mRemoteDataStore.deleteStudentFromUniversity(id,fk,callback);
+    }
+
+    private void getUniversitiesFromRemoteDataStore(DataStore.LoadUniversitiesCallback callback){
+        if(mUniversitiesCache == null)
+        {
+            mUniversitiesCache = new ArrayList<>();
+        }
+        mRemoteDataStore.loadAllUniversities(new DataStore.LoadUniversitiesCallback() {
+            @Override
+            public void onUniversitiesLoaded(List<University> universities) {
+
+                refreshCache(universities);
+                callback.onUniversitiesLoaded(universities);
+            }
+        },true);
+
+    }
+
+    private void refreshCache(List<University> universities){
+        mUniversitiesCache.clear();
+
+        mUniversitiesCache = universities;
     }
 }

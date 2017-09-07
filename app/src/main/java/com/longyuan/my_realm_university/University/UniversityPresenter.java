@@ -39,15 +39,21 @@ public class UniversityPresenter implements UniversityContract.Presenter {
 
     }
 
-    @Override
+
     public void loadUniversities() {
+
+        loadUniversities(false);
+    }
+
+    @Override
+    public void loadUniversities(boolean forceUpdate) {
 
         mUniversityRepository.loadAllUniversities(new DataStore.LoadUniversitiesCallback() {
             @Override
             public void onUniversitiesLoaded(List<University> universities) {
                 mView.showUniversities(universities);
             }
-        });
+        },forceUpdate);
     }
 
     @Override

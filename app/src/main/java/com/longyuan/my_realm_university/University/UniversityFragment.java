@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,6 +40,8 @@ public class UniversityFragment extends Fragment implements UniversityContract.V
 
     private UniversityRecyclerViewAdapter mUniversityRecyclerViewAdapter;
 
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
     public static UniversityFragment getInstance(){
 
         return new UniversityFragment();
@@ -55,6 +58,8 @@ public class UniversityFragment extends Fragment implements UniversityContract.V
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.frag_main,container,false);
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.universities_swipe);
 
         mRecyclerView = (RecyclerView) root.findViewById(R.id.universities_list);
 
@@ -80,6 +85,14 @@ public class UniversityFragment extends Fragment implements UniversityContract.V
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                mPresenter.loadUniversities(true);
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

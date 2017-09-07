@@ -26,7 +26,7 @@ public interface UniversityContract {
 
         void start();
 
-        void loadUniversities();
+        void loadUniversities(boolean forceUpdate);
 
         void deleteUniversity(String id,int position);
 
